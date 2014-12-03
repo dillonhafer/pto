@@ -21,11 +21,11 @@
   <div class='large-6 columns'>
     <strong>Earnings</strong>
     <ul class='no-bullet'>
-      <% @person.pto_expenses.order(:expense_date).group_by(&:year).each do |year, expenses| %>  
+      <% @person.hours_earned.each do |hours_groups| %>  
         <li>
-          <%= year %> - <%= pluralize 8, 'hour' %>          
+          <%= hours_groups.year %> - <%= pluralize hours_groups.hours, 'hour' %>          
         </li>
-      <% end %>
+      <% end %>      
     </ul>
   </div>
 </div>
