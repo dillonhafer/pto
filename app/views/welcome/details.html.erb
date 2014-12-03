@@ -4,7 +4,7 @@
 
 <div class='row'>
   <div class='large-6 columns'>
-    Expenses
+    <strong>Expenses</strong>
     <ul class='no-bullet'>
       <% @person.pto_expenses.order(:expense_date).group_by(&:year).each do |year, expenses| %>  
         <li>
@@ -19,7 +19,7 @@
     </ul>
   </div>
   <div class='large-6 columns'>
-    Earnings
+    <strong>Earnings</strong>
     <ul class='no-bullet'>
       <% @person.pto_expenses.order(:expense_date).group_by(&:year).each do |year, expenses| %>  
         <li>

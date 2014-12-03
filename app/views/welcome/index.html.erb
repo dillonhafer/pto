@@ -2,14 +2,14 @@
   <div class='small-6 columns small-centered'>
     <% @people.each do |person| %>
     <div class='row'>
-      <div class='small-5 columns'>
+      <div class='small-4 columns'>
         <strong><%= person.name %></strong>
       </div>
       <div class='small-5 columns text-right'>
         <strong><%= pluralize person.hours_remaining, 'hour' %></strong> remaining
       </div>
-      <div class='small-2 columns'>
-        <%= link_to 'details', details_path(person), class: 'tiny button radius', data: {reveal_id: 'details', reveal_ajax: true} %>
+      <div class='small-3 columns'>
+        <%= link_to_i 'info', 'details', details_path(person), class: 'tiny button radius', data: {reveal_id: 'details', reveal_ajax: true} %>
       </div>
       <hr />
     </div>
@@ -17,4 +17,4 @@
   </div>
 </div>
 
-<div id='details' class='reveal-modal tiny' data-reveal></div>
+<div id='details' class='reveal-modal medium' data-reveal></div>
