@@ -1,0 +1,36 @@
+<% cache person do %>
+<h3>Details for <%= person.name %></h3>
+<h4 class='subheader'><strong><%= pluralize person.hours_remaining, 'hour' %></strong> remaining</h4>
+<hr />
+
+<div class='row'>
+  <div class='large-6 columns'>
+    <strong>Expenses</strong>
+    <ul class='no-bullet'>
+      <% person.pto_expenses.order(:expense_date).group_by(&:year).each do |year, expenses| %>  
+        <li>
+          <h5><%= year %></h5>
+          <ul>
+            <% expenses.each do |expense| %>
+              <li><%= expense.expense_date.strftime("%m/%d/%Y") %> - <%= pluralize expense.hours, 'hour' %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class='large-6 columns'>
+    <strong>Earnings</strong>
+    <ul class='no-bullet'>
+      <% person.years_employed.each do |year| %>      
+        <li>          
+          <%= year %> - <%= pluralize person.hours_in_year(year), 'hour' %>          
+        </li>
+      <% end %>
+        <strong>All Time</strong> - <%= person.total_alloted_hours %>
+    </ul>
+  </div>
+</div>
+
+<a class="close-reveal-modal">&#215;</a>
+<% end %>

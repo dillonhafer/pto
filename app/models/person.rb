@@ -1,30 +1,33 @@
 class Person < ActiveRecord::Base
   has_many :pto_expenses
+  HOURS_PER_MONTH = 12
 
   def hours_remaining
-    alloted_hours - hours_used
+    total_alloted_hours - hours_used
   end
 
-  def hours_earned
-    hour_groups = []
-    (years_since_start+1).times do |i|
-      hours = if years_since_start == i
-        hours_this_year
-      else
-        144
-      end
+  def total_alloted_hours
+    alloted_hours(months_since_start)
+  end
 
-      hour_groups << OpenStruct.new(year: start_date.year+1+i, hours: hours)
+  def hours_in_year(year)    
+    if start_date.advance(years: year - start_date.year) < Date.today
+      alloted_hours
+    else
+      hours_this_year
     end
-    hour_groups
   end
 
-  def hours_in_year(year)
-    
+  def years_employed
+    start_year = start_date.year + 1
+    end_year   = start_year + years_since_start
+    (start_year..end_year).to_a
   end
+
+  private
 
   def hours_this_year
-    (months_since_start % 12) * 12
+    alloted_hours(months_since_start % 12)
   end
 
   def years_since_start 
@@ -40,8 +43,8 @@ class Person < ActiveRecord::Base
     pto_expenses.sum(:hours)
   end  
 
-  def alloted_hours
-    months_since_start * 12
+  def alloted_hours(months=12)
+    months * HOURS_PER_MONTH
   end
 
   def months_since_start
