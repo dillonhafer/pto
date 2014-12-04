@@ -17,3 +17,13 @@ group :production do
   gem 'dalli'
   gem 'unicorn'
 end
+
+group :test do
+  gem 'ffaker'
+  gem 'factory_girl'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'guard-rspec'
+end
