@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   has_many :pto_expenses
   validates_presence_of :name, :start_date
 
-  HOURS_PER_MONTH = 12
+  HOURS_PER_MONTH = ENV['HOURS_PER_MONTH'].to_i || 12
 
   def hours_remaining
     total_alloted_hours - hours_used
