@@ -27,7 +27,7 @@
           <%= year %> - <%= pluralize person.hours_in_year(year), 'hour' %>          
         </li>
       <% end %>
-        <strong>All Time</strong> - <%= person.total_alloted_hours %>
+        <strong>All Time</strong> - <%= pluralize person.total_alloted_hours, 'hour' %>
     </ul>
   </div>
 </div>
