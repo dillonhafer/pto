@@ -6,8 +6,8 @@ feature "seeing details" do
   end
 
   scenario "viewing details" do
-    visit '/'    
-    click_link 'details'
+    visit root_path
+    click_link('details')
     expect(page).to have_content 'All Time'
   end
 end
