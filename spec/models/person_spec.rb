@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Person do
 
-  subject(:person) { FactoryGirl.create(:person) }
+  subject(:person) { FactoryGirl.create(:person, start_date: 2.months.ago) }
 
   describe "validations" do
     it { should be_an_instance_of(Person) }
@@ -13,10 +13,6 @@ describe Person do
   end
 
   context "based on 12 hours per month for 2 months" do
-    before(:each) do
-      person.start_date = 2.months.ago        
-    end
-
     describe "#hours_remaining" do
       it "returns #total_alloted_hours if there are no expenses" do
         expect(person.hours_remaining).to eq(person.total_alloted_hours.to_f)
@@ -34,7 +30,7 @@ describe Person do
     end
 
     describe "#total_alloted_hours" do
-      it "returns 24 hours earned" do
+      it "returns 24 hours earned" do        
         person.total_alloted_hours.should eq(24)
       end
 
